@@ -1,4 +1,5 @@
 //for more details: https://platform.openai.com/docs/guides/images/usage
+
 const { Configuration, OpenAIApi } = require('openai');
 
 const configuration = new Configuration({
@@ -6,44 +7,44 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-const generateImage = async (req, res) => {
-  const { prompt, size } = req.body || {};
-
-  if (!prompt) {
-    return res.status(400).json({
-      success: false,
-      error: "'prompt' is a required property",
-    });
-  }
-
-  const iconSize = size === 'small' ? '256x256' : size === 'medium' ? '512x512' : '1024x1024';
-
+async function generateImage(req, res) {
   try {
+    const { prompt, size } = req.body || {};
+
+    if (!prompt) {
+      return res.status(400).json({
+        success: false,
+        error: "'prompt' is a required property",
+      });
+    }
+
+    const iconSize = size === 'small' ? '256x256' : size === 'medium' ? '512x512' : '1024x1024';
+
     const response = await openai.createImage({
       prompt,
       n: 1,
       size: iconSize,
     });
 
-    const iconUrl = response.data.data[0].url;
+    const iconUrl = response?.data?.data?.[0]?.url;
+
+    if (!iconUrl) {
+      throw new Error('The image could not be generated');
+    }
 
     res.status(200).json({
       success: true,
       data: iconUrl,
     });
   } catch (error) {
-    if (error.response) {
-      console.log(error.response.status);
-      console.log(error.response.data);
-    } else {
-      console.log(error.message);
-    }
+    console.error(error);
 
     res.status(400).json({
       success: false,
-      error: 'The image could not be generated',
+      error: error.message || 'The image could not be generated',
     });
   }
-};
+}
 
 module.exports = { generateImage };
+
