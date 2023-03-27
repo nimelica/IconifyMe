@@ -10,7 +10,7 @@ Generate your very own custom aesthetic icons using Open AI by simply providing 
 
 ### Generate multiple icons
 
-![mona lisa](assets/images/mona_lisa_multi.png)
+![mona lisa](assets/images/mona_lisa_hat.png)
 
 ### Get realistic images
 
