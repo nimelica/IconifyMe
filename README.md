@@ -6,7 +6,7 @@ Generate your very own custom aesthetic icons using Open AI by simply providing 
 
 ### Describe and generate your icon
 
-![van gogh](assets/images/girl_in_van_gogh_style)
+![van gogh](assets/images/girl_in_van_gogh_style.png)
 
 ![the last supper](assets/images/the_last_supper.png)
 
