@@ -25,11 +25,10 @@
         </div>
       </div>
     </header>
-
     <main>
       <section class="showcase">
         <form id="image-form">
-          <h1>Describe Your Icon</h1>
+          <h1>Generate Your Icon</h1>
           <div class="form-control">
             <input type="text" id="prompt" placeholder="Enter Text" />
           </div>
@@ -41,6 +40,13 @@
               <option value="large">Large</option>
             </select>
           </div>
+         <!-- amount -->
+        <div class="form-control">
+           <select name="amount" id="amount">
+             <option value="single">Single</option>
+             <option value="multiple">Multiple</option>
+            </select>
+         </div>
           <div class="button-group">
            <button type="submit" class="btn">Generate</button>
            <button type="button" class="btn" id="download-button">Download</button>

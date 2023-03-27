@@ -1,4 +1,4 @@
- function onSubmit(e) {
+async function onSubmit(e) {
   e.preventDefault();
 
   document.querySelector('.msg').textContent = '';
@@ -6,16 +6,18 @@
 
   const prompt = document.querySelector('#prompt').value;
   const size = document.querySelector('#size').value;
+  const amount = document.querySelector('#amount').value;
 
   if (prompt === '') {
     alert('Please add some description');
     return;
   }
 
-  generateImageRequest(prompt, size);
+  generateImageRequest(prompt, size, amount);
 }
 
-async function generateImageRequest(prompt, size) {
+
+async function generateImageRequest(prompt, size, amount) {
   try {
     showSpinner();
 
@@ -27,33 +29,36 @@ async function generateImageRequest(prompt, size) {
       body: JSON.stringify({
         prompt,
         size,
+        amount,
       }),
     });
 
     if (!response.ok) {
       removeSpinner();
-      throw new Error('That image could not be generated');
+      throw new Error('The image(s) could not be generated');
     }
 
     const data = await response.json();
-    const imageUrl = data.data;
-    document.querySelector('#image').src = imageUrl;
-
-    const downloadButton = document.createElement('a');
-    downloadButton.textContent = 'Download';
-    downloadButton.classList.add('btn');
-    downloadButton.addEventListener('click', () => {
-      downloadImage(imageUrl);
-    });
-
+    const imageUrls = data.data;
     const imageContainer = document.querySelector('.image-container');
-    imageContainer.appendChild(downloadButton);
+
+    // clear any previously displayed images
+    imageContainer.innerHTML = '';
+
+    // display each image URL as an image element
+    for (let i = 0; i < imageUrls.length; i++) {
+      const imageElement = document.createElement('img');
+      imageElement.src = imageUrls[i];
+      imageElement.alt = `Generated image ${i + 1}`;
+      imageContainer.appendChild(imageElement);
+    }
 
     removeSpinner();
   } catch (error) {
     document.querySelector('.msg').textContent = error;
   }
 }
+
 
 function downloadImage(imageUrl) {
   const link = document.createElement('a');
@@ -74,3 +79,14 @@ function removeSpinner() {
 }
 
 document.querySelector('#image-form').addEventListener('submit', onSubmit);
+
+document.querySelector('#download-button').addEventListener('click', () => {
+  const imageUrl = document.querySelector('#image').src;
+  if (imageUrl === '') {
+    alert('Please generate an image first');
+    return;
+  }
+
+  downloadImage(imageUrl);
+  document.querySelector('#download-button').remove();
+});
