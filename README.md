@@ -6,13 +6,13 @@ Generate your very own custom aesthetic icons using Open AI by simply providing 
 
 ### Describe and generate your icon
 
-<img src="assets/images/girl_in_van_gogh_style.png" alt="van gogh" width="400" height="400">
+<img src="assets/images/girl_in_van_gogh_style.png" alt="van gogh" width="520" height="520">
 
 ### Generate multiple icons
 
-![mona lisa](assets/images/mona_lisa_hat.png)
+<img src="assets/images/mona_lisa_hat.png" alt="mona lisa" width="520" height="520">
 
 ### Get realistic images
 
-![istanbul](assets/images/istanbul.png)
+<img src="assets/images/istanbul.png" alt="istanbul" width="520" height="520">
 
