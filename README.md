@@ -6,7 +6,7 @@ Generate your very own custom aesthetic icons using Open AI by simply providing 
 
 ### Describe and generate your icon
 
-![van gogh|250x250](assets/images/girl_in_van_gogh_style.png)
+<img src="assets/images/girl_in_van_gogh_style.png" alt="van gogh" width="400" height="400">
 
 ### Generate multiple icons
 
